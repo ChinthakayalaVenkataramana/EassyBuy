@@ -12,13 +12,19 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                dir('EassyBuy') {
-                    sh 'mvn test'
-                }
+     stage('Test') {
+    steps {
+        dir('EassyBuy') {
+            withEnv([
+                'DB_URL=jdbc:mysql://localhost:3306/mysqlking',
+                'DB_USERNAME=eassybuy',
+                'DB_PASSWORD=EassyBuy@12345'
+            ]) {
+                sh 'mvn test'
             }
         }
+    }
+}
 
         stage('Docker Build') {
             steps {
