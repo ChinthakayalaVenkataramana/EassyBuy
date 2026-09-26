@@ -10,8 +10,11 @@ public enum ResponseMessages {
     
 	ADDRESS_ADDED_SUCCESSFULLY("Address added successfully"),
 	INVALID_USER("Invalid user"),
-	ADDRESS_NOT_FOUND("Address not found");
+	ADDRESS_NOT_FOUND("Address not found"),
 
+	PROFILE_SAVED_SUCCESSFULLY("Profile saved successfully"),
+	PROFILE_NOT_FOUND("Profile not found");
+	
     private final String message;
 
     ResponseMessages(String message) {
