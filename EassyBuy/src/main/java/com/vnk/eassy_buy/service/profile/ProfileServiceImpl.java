@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vnk.eassy_buy.Entity.User;
 import com.vnk.eassy_buy.Entity.profile.Profile;
-import com.vnk.eassy_buy.config.SecurityUtil;
+import com.vnk.eassy_buy.config.util.SecurityUtil;
 import com.vnk.eassy_buy.constants.ResponseMessages;
 import com.vnk.eassy_buy.dto.profile.ProfileRequest;
 import com.vnk.eassy_buy.dto.profile.ProfileResponse;
