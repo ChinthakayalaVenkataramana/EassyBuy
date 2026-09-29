@@ -10,7 +10,6 @@ public class OtpUtil {
    
    public static String genarateOtp() {
 	   int otp = RANDOM.nextInt(1000000);
-	   System.out.println();
 	   return String.format("%06d", otp);
    }
    
