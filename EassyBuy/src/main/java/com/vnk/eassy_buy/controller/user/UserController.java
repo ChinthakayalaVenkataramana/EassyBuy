@@ -1,10 +1,10 @@
-package com.vnk.eassy_buy.controller;
+package com.vnk.eassy_buy.controller.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vnk.eassy_buy.dto.UserDto;
 import com.vnk.eassy_buy.dto.UserRequest;
-import com.vnk.eassy_buy.service.UserService;
+import com.vnk.eassy_buy.service.user.UserService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/auth")
@@ -39,4 +37,13 @@ public class UserController {
 		return new ResponseEntity<String>(userService.forgotPassword(userRequest), HttpStatus.OK);
 	}
 	
+	@PostMapping("/verify")
+	public ResponseEntity<String>otpVerification(@RequestParam String otp, @RequestParam String mail) throws Exception{
+		return ResponseEntity.ok(userService.otpVerification(otp, mail));
+	}
+	
+	@PostMapping("/resend-otp")
+	public ResponseEntity<String> reSendOtp(@RequestParam String mail){
+		return ResponseEntity.ok(userService.reSendOtp(mail));
+	}
 }
