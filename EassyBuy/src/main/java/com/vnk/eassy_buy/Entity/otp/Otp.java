@@ -2,7 +2,11 @@ package com.vnk.eassy_buy.Entity.otp;
 
 import java.time.LocalDateTime;
 
+import com.vnk.eassy_buy.constants.OtpType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,5 +29,7 @@ public class Otp {
 	private String otp;
 	private LocalDateTime expiryTime;
 	private Integer attempts;
-	
+	@Enumerated(EnumType.STRING)
+	private OtpType otpType;
+
 }
