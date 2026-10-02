@@ -14,6 +14,7 @@ import com.vnk.eassy_buy.Entity.otp.Otp;
 import com.vnk.eassy_buy.config.JwtService;
 import com.vnk.eassy_buy.config.util.OtpUtil;
 import com.vnk.eassy_buy.constants.LoginProvider;
+import com.vnk.eassy_buy.constants.OtpType;
 import com.vnk.eassy_buy.constants.ResponseMessages;
 import com.vnk.eassy_buy.constants.TemplateType;
 import com.vnk.eassy_buy.constants.UserRoles;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
 		if (userRepository.existsByMail(dto.getMail())) {
 			throw new RuntimeException(ResponseMessages.USER_ALREADY_EXISTS.getMessage());
 		}
-		sendOtp(dto.getMail(), dto.getUsername());
+		sendOtp(dto.getMail(), dto.getUsername(), OtpType.VERIFICATION);
 		userRepository.save(User.builder().mail(dto.getMail()).mobile(dto.getMobile())
 				.password(passwordEncoder.encode(dto.getPassword())).role(UserRoles.BUYER).username(dto.getUsername())
 				.provider(List.of(LoginProvider.LOCAL)).build());
@@ -63,17 +64,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String forgotPassword(UserRequest userRequest) {
-		if (userRepository.existsByMail(userRequest.getMail())) {
-			User user = userRepository.findByMail(userRequest.getMail()).orElseThrow(() -> {
-				throw new RuntimeException(ResponseMessages.INVALID_MAIL.getMessage());
-			});
+	public String forgotPassword(String mail) {
+		if (!userRepository.existsByMail(mail))
+			throw new RuntimeException(ResponseMessages.INVALID_MAIL.getMessage());
 
-			return updatePassword(User.builder().id(user.getId()).mail(user.getMail()).mobile(user.getMobile())
-					.password(passwordEncoder.encode(userRequest.getPassword())).role(user.getRole())
-					.username(user.getUsername()).build());
-		}
-		throw new RuntimeException(ResponseMessages.INVALID_MAIL.getMessage());
+		return reSendOtp(mail, OtpType.FORGOTPASSWORD);
 	}
 
 	private String updatePassword(User user) {
@@ -81,10 +76,10 @@ public class UserServiceImpl implements UserService {
 		return ResponseMessages.PASSWORD_CHANGED_SUCCESSFULLY.getMessage();
 	}
 
-	private void sendOtp(String mail, String username) {
+	private void sendOtp(String mail, String username, OtpType otpType) {
 		String genarateOtp = OtpUtil.genarateOtp();
 		otpRepository.save(Otp.builder().attempts(0).expiryTime(LocalDateTime.now().plusMinutes(OTP_EXPIRY_MINUTES))
-				.mail(mail).otp(genarateOtp).verified(false).build());
+				.mail(mail).otp(genarateOtp).verified(false).otpType(otpType).build());
 
 		Map<String, Object> data = new HashMap<>();
 
@@ -93,11 +88,19 @@ public class UserServiceImpl implements UserService {
 		data.put("expiryMinutes", OTP_EXPIRY_MINUTES);
 
 		try {
-			emailService.sendTemplateEmail(mail, "EassyBuy - Email Verification OTP", TemplateType.OTP.getTemplate(),
-					data);
+
+			String subject;
+			if (otpType == OtpType.VERIFICATION) 
+				subject = "EassyBuy - Email Verification OTP";
+		    else 
+				subject = "EassyBuy - Password Reset OTP";
+			
+			emailService.sendTemplateEmail(mail, subject, TemplateType.OTP.getTemplate(), data);
 		} catch (IOException e) {
 			log.error("Failed to send OTP email to: {}", mail, e);
+			throw new RuntimeException("Unable to send OTP email");
 		}
+
 	}
 
 	@Override
@@ -114,28 +117,34 @@ public class UserServiceImpl implements UserService {
 			log.warn("OTP already verified for user: {}", mail);
 			return "OTP already verified";
 		}
-		
+
 		if (otpEntity.getExpiryTime().isBefore(LocalDateTime.now())) {
-
 			log.warn("OTP expired for user: {}", mail);
-
 			return "OTP expired";
 		}
-		
+
 		otpEntity.setVerified(true);
 		otpRepository.save(otpEntity);
-		log.info("OTP verified successfully for user: {}", mail);
-		return "OTP verified Successfully";
+
+		if (otpEntity.getOtpType().equals(OtpType.VERIFICATION)) {
+			log.info("Registration OTP verified successfully for user: {}", mail);
+			return "Email verified successfully";
+		}
+
+		if (otpEntity.getOtpType().equals(OtpType.FORGOTPASSWORD)) {
+			log.info("Forgot password OTP verified successfully for user: {}", mail);
+			return "OTP verified successfully. Password reset link sent to your email";
+		}
+		return "Invalid OTP type";
 	}
 
 	@Override
-	public String reSendOtp(String mail) {
+	public String reSendOtp(String mail, OtpType otpType) {
 		if (userRepository.existsByMail(mail)) {
-			Otp optionalOtp = otpRepository.findByMail(mail)
-			        .orElseThrow(() -> new RuntimeException("OTP not found"));
+			Otp optionalOtp = otpRepository.findByMail(mail).orElseThrow(() -> new RuntimeException("OTP not found"));
 			if (!optionalOtp.getVerified()) {
 				String name = mail.substring(0, mail.indexOf("@"));
-				sendOtp(mail, name);
+				sendOtp(mail, name, otpType);
 				return "OTP resent successfully";
 			}
 			return "OTP already verified";

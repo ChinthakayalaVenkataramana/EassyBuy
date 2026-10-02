@@ -32,9 +32,9 @@ public class UserController {
 		return new ResponseEntity<String>(userService.login(userRequest), HttpStatus.OK);
 	}
 
-	@PutMapping("/update_password")
-	public ResponseEntity<String> putMethodName(@RequestBody UserRequest userRequest) {
-		return new ResponseEntity<String>(userService.forgotPassword(userRequest), HttpStatus.OK);
+	@PutMapping("/forgot-password")
+	public ResponseEntity<String> putMethodName(@RequestBody String mail) {
+		return new ResponseEntity<String>(userService.forgotPassword(mail), HttpStatus.OK);
 	}
 	
 	@PostMapping("/verify")
@@ -44,6 +44,6 @@ public class UserController {
 	
 	@PostMapping("/resend-otp")
 	public ResponseEntity<String> reSendOtp(@RequestParam String mail){
-		return ResponseEntity.ok(userService.reSendOtp(mail));
+		return ResponseEntity.ok(userService.reSendOtp(mail,null));
 	}
 }

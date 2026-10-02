@@ -21,6 +21,7 @@ public class ProductServiceImpl implements ProductService {
 		if (productDto == null) {
 			return "Product Unable to Add,Product Details Are Empty";
 		} else {
+			product.setProductId(product.getProductId());
 			product.setActive(productDto.getActive());
 			product.setAttributs(productDto.getAttributs());
 			product.setBrand(productDto.getBrand());
@@ -72,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findById(productId)
 				.orElseThrow(() -> new RuntimeException("Product not found"));
 
-		return new ProductDto(product.getProductName(), product.getDescription(), product.getProductModel(),
+		return new ProductDto(product.getProductId() ,product.getProductName(), product.getDescription(), product.getProductModel(),
 				product.getProductPrice(), product.getProductDiscount(), product.getCategory(), product.getBrand(),
 				product.getStockQuantity(), product.getActive(), product.getAttributs());
 	}
@@ -81,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDto> getAllProducts() {
 		List<Product> allProducts = productRepository.findAll();
 		return allProducts.stream()
-				.map(product -> new ProductDto(product.getProductName(), product.getDescription(),
+				.map(product -> new ProductDto(product.getProductId(),product.getProductName(), product.getDescription(),
 						product.getProductModel(), product.getProductPrice(), product.getProductDiscount(),
 						product.getCategory(), product.getBrand(), product.getStockQuantity(), product.getActive(),
 						product.getAttributs()))
