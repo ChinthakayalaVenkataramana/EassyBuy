@@ -29,7 +29,7 @@ public class Address {
     private String fullName;
 
     private Long mobile;
-    
+
     private Long alternateMobile;
 
     private String houseNo;
@@ -49,7 +49,7 @@ public class Address {
     private String landmark;
 
     private Boolean defaultAddress;
-    
+
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;

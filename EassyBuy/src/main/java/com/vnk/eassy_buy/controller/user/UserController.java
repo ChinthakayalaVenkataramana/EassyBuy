@@ -24,24 +24,24 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody UserDto userDto) {
-		return new ResponseEntity<String>(userService.register(userDto), HttpStatusCode.valueOf(201));
+		return new ResponseEntity<>(userService.register(userDto), HttpStatusCode.valueOf(201));
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody UserRequest userRequest) {
-		return new ResponseEntity<String>(userService.login(userRequest), HttpStatus.OK);
+		return new ResponseEntity<>(userService.login(userRequest), HttpStatus.OK);
 	}
 
 	@PutMapping("/forgot-password")
 	public ResponseEntity<String> putMethodName(@RequestBody String mail) {
-		return new ResponseEntity<String>(userService.forgotPassword(mail), HttpStatus.OK);
+		return new ResponseEntity<>(userService.forgotPassword(mail), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/verify")
 	public ResponseEntity<String>otpVerification(@RequestParam String otp, @RequestParam String mail) throws Exception{
 		return ResponseEntity.ok(userService.otpVerification(otp, mail));
 	}
-	
+
 	@PostMapping("/resend-otp")
 	public ResponseEntity<String> reSendOtp(@RequestParam String mail){
 		return ResponseEntity.ok(userService.reSendOtp(mail,null));

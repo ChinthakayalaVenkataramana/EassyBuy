@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class AddressRequest {
-	
+
 	private String fullName;
 
 	private Long mobile;

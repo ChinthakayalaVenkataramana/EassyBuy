@@ -65,8 +65,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String forgotPassword(String mail) {
-		if (!userRepository.existsByMail(mail))
+		if (!userRepository.existsByMail(mail)) {
 			throw new RuntimeException(ResponseMessages.INVALID_MAIL.getMessage());
+		}
 
 		return reSendOtp(mail, OtpType.FORGOTPASSWORD);
 	}
@@ -90,11 +91,12 @@ public class UserServiceImpl implements UserService {
 		try {
 
 			String subject;
-			if (otpType == OtpType.VERIFICATION) 
+			if (otpType == OtpType.VERIFICATION) {
 				subject = "EassyBuy - Email Verification OTP";
-		    else 
+			} else {
 				subject = "EassyBuy - Password Reset OTP";
-			
+			}
+
 			emailService.sendTemplateEmail(mail, subject, TemplateType.OTP.getTemplate(), data);
 		} catch (IOException e) {
 			log.error("Failed to send OTP email to: {}", mail, e);

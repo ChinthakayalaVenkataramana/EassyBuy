@@ -10,7 +10,7 @@ import lombok.Data;
 public class AddressResponse {
 
 	private Integer id;
-	
+
 	private String fullName;
 
 	private Long mobile;

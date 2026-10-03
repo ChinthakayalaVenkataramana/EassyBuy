@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-	
+
 	private final JwtService jwtService;
 	private final UserRepository userRepository;
 
@@ -34,7 +34,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		User user = userRepository.findByMail(email)
 				.orElseThrow(() -> new RuntimeException(ResponseMessages.INVALID_USER.getMessage()));
 		String token = jwtService.generateToken(email, user.getRole().name());
-		
+
 		response.setContentType("text/plain");
 
         response.getWriter().write(

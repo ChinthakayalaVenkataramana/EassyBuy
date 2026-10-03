@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProfileRequest {
-	
+
 	private String profileImage;
 
 	private LocalDate dateOfBirth;
 
 	private String gender;
-	
+
 }

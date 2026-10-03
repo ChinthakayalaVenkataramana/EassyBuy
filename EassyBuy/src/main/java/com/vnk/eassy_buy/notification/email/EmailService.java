@@ -10,5 +10,5 @@ import freemarker.template.TemplateNotFoundException;
 public interface EmailService {
 	void sendTemplateEmail(String to, String subject, String template, Map<String, Object> data)
 			throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException;
-	
+
 }
