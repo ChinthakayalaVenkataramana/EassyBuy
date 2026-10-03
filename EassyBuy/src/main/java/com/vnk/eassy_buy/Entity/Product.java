@@ -1,5 +1,6 @@
 package com.vnk.eassy_buy.Entity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Product {
 	private String productName;
 	private String description;
 	private String productModel;
-	private Double productPrice;
+	private BigDecimal productPrice;
 	private Integer productDiscount;
 	private String category;
 	private String brand;

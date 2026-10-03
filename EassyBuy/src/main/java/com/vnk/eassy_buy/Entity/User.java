@@ -49,10 +49,10 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	private UserRoles role;
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
-	private List<LoginProvider> provider=new ArrayList<LoginProvider>();
+	private List<LoginProvider> provider=new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Address> address;

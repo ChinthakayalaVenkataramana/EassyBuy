@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-	
+
 	private String mail;
 
 	private Long mobile;

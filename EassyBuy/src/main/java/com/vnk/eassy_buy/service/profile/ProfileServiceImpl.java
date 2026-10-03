@@ -71,7 +71,7 @@ public class ProfileServiceImpl implements ProfileService {
 		Profile profile = user.getProfile();
 		log.info("Deleting profile for user: {}, profileId: {}", userName, profile.getId());
 		profileRepository.delete(profile);
-		user.setProfile(null);	
+		user.setProfile(null);
 		log.info("Profile deleted successfully for user: {}", userName);
 	}
 

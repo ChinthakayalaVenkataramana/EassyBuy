@@ -27,13 +27,13 @@ public class Profile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String profileImage;
-	
+
 	private LocalDate dateOfBirth;
-	
+
 	private String gender;
-	
+
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false, unique = true)
 	private User user;

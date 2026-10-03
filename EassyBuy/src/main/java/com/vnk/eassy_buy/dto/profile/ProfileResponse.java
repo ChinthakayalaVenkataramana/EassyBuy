@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProfileResponse {
-	
+
 	private Long mobileNo;
 
 	private String mail;

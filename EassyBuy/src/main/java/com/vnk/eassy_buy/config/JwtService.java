@@ -22,7 +22,7 @@ public class JwtService {
         Instant now = Instant.now();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("vnk-product-api")
+                .issuer("vnk-EassyBuy-api")
                 .subject(username)
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))

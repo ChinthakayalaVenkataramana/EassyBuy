@@ -28,24 +28,24 @@ public class AddressController {
 
 	@PostMapping
 	public ResponseEntity<String> addAddress(@RequestBody AddressRequest addressRequest) {
-		return new ResponseEntity<String>(addressService.addAddress(addressRequest), HttpStatus.CREATED);
+		return new ResponseEntity<>(addressService.addAddress(addressRequest), HttpStatus.CREATED);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<AddressResponse>> getMethodName(@RequestParam String param) {
-		return new ResponseEntity<List<AddressResponse>>(addressService.getAllAddress(), HttpStatus.OK);
+		return new ResponseEntity<>(addressService.getAllAddress(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
-		return new ResponseEntity<String>("Address deleted successfully", HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>("Address deleted successfully", HttpStatus.NO_CONTENT);
 	}
 
 	@PutMapping("/{id}/default")
 	public ResponseEntity<String> defaultAddress(@RequestParam Integer id) {
 		return ResponseEntity.ok("Address set as default successfully");
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<AddressResponse> getAddress(
 	        @PathVariable Integer id) {

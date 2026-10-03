@@ -7,10 +7,10 @@ public class OtpUtil {
    private OtpUtil() {
 	   throw new UnsupportedOperationException("Utility class cannot be instantiated");
    }
-   
+
    public static String genarateOtp() {
 	   int otp = RANDOM.nextInt(1000000);
 	   return String.format("%06d", otp);
    }
-   
+
 }

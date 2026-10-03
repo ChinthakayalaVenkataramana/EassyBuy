@@ -1,6 +1,4 @@
-package com.vnk.eassy_buy.service;
-
-import java.util.List;
+package com.vnk.eassy_buy.service.product;
 
 import com.vnk.eassy_buy.dto.ProductDto;
 
@@ -11,7 +9,4 @@ public interface ProductService {
 
 	public String deleteProduct(Long id);
 
-	public ProductDto getProduct(Long productId);
-
-	public List<ProductDto> getAllProducts();
 }
