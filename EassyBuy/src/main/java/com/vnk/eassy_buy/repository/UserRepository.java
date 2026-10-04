@@ -4,7 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.vnk.eassy_buy.Entity.User;
+import com.vnk.eassy_buy.Entity.user.User;
+
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 

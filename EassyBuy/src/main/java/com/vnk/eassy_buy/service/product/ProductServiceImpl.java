@@ -2,8 +2,8 @@ package com.vnk.eassy_buy.service.product;
 
 import org.springframework.stereotype.Service;
 
-import com.vnk.eassy_buy.Entity.Product;
 import com.vnk.eassy_buy.dto.ProductDto;
+import com.vnk.eassy_buy.Entity.Product;
 import com.vnk.eassy_buy.repository.product.ProductRepository;
 
 import lombok.AllArgsConstructor;
