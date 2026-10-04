@@ -3,6 +3,7 @@ package com.vnk.eassy_buy.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -10,7 +11,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
-import com.vnk.eassy_buy.Entity.User;
+import com.vnk.eassy_buy.Entity.user.User;
 import com.vnk.eassy_buy.constants.LoginProvider;
 import com.vnk.eassy_buy.constants.UserRoles;
 import com.vnk.eassy_buy.repository.UserRepository;
@@ -41,7 +42,7 @@ public class GoogleOAuth2UserService extends OidcUserService {
 
 			User newUser = User.builder().mail(email).mobile(null)
 					.provider(new ArrayList<>(List.of(LoginProvider.GOOGLE))).password(null).username(name)
-					.role(UserRoles.BUYER).build();
+					.role(Set.of(UserRoles.BUYER)).build();
 
 			userRepository.save(newUser);
 

@@ -2,7 +2,7 @@ package com.vnk.eassy_buy.Entity.profile;
 
 import java.time.LocalDate;
 
-import com.vnk.eassy_buy.Entity.User;
+import com.vnk.eassy_buy.Entity.user.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.vnk.eassy_buy.Entity.User;
 import com.vnk.eassy_buy.Entity.Address.Address;
+import com.vnk.eassy_buy.Entity.user.User;
 import com.vnk.eassy_buy.config.util.SecurityUtil;
 import com.vnk.eassy_buy.constants.ResponseMessages;
 import com.vnk.eassy_buy.dto.Address.AddressRequest;

@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.vnk.eassy_buy.Entity.User;
 import com.vnk.eassy_buy.Entity.otp.Otp;
+import com.vnk.eassy_buy.Entity.user.User;
 import com.vnk.eassy_buy.config.JwtService;
 import com.vnk.eassy_buy.config.util.OtpUtil;
 import com.vnk.eassy_buy.constants.LoginProvider;
@@ -47,8 +49,8 @@ public class UserServiceImpl implements UserService {
 		}
 		sendOtp(dto.getMail(), dto.getUsername(), OtpType.VERIFICATION);
 		userRepository.save(User.builder().mail(dto.getMail()).mobile(dto.getMobile())
-				.password(passwordEncoder.encode(dto.getPassword())).role(UserRoles.BUYER).username(dto.getUsername())
-				.provider(List.of(LoginProvider.LOCAL)).build());
+				.password(passwordEncoder.encode(dto.getPassword())).role(Set.of(UserRoles.BUYER))
+				.username(dto.getUsername()).provider(List.of(LoginProvider.LOCAL)).build());
 		return ResponseMessages.USER_REGISTERED_SUCCESSFULLY.getMessage();
 	}
 
@@ -60,7 +62,8 @@ public class UserServiceImpl implements UserService {
 		if (!matches) {
 			throw new RuntimeException(ResponseMessages.INVALID_USERNAME_OR_PASSWORD.getMessage());
 		}
-		return jwtService.generateToken(userRequest.getMail(), user.getRole().name());
+		return jwtService.generateToken(userRequest.getMail(),
+				user.getRole().stream().map(Enum::name).collect(Collectors.joining(",")));
 	}
 
 	@Override

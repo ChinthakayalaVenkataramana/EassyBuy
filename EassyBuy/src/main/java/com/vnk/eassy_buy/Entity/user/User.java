@@ -1,10 +1,12 @@
-package com.vnk.eassy_buy.Entity;
+package com.vnk.eassy_buy.Entity.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.vnk.eassy_buy.Entity.Address.Address;
 import com.vnk.eassy_buy.Entity.profile.Profile;
+import com.vnk.eassy_buy.Entity.seller.Seller;
 import com.vnk.eassy_buy.constants.LoginProvider;
 import com.vnk.eassy_buy.constants.UserRoles;
 
@@ -46,17 +48,22 @@ public class User {
 	private String username;
 
 	private String password;
-
+	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
-	private UserRoles role;
+	private Set<UserRoles> role;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
-	private List<LoginProvider> provider=new ArrayList<>();
+	private List<LoginProvider> provider = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Address> address;
 
 	@OneToOne(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Profile profile;
+	
+	@OneToOne(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+	private Seller seller;
+	
 }
