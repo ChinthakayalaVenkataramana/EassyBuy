@@ -8,8 +8,8 @@ import com.vnk.eassy_buy.Entity.Address.Address;
 import com.vnk.eassy_buy.Entity.user.User;
 import com.vnk.eassy_buy.config.util.SecurityUtil;
 import com.vnk.eassy_buy.constants.ResponseMessages;
-import com.vnk.eassy_buy.dto.Address.AddressRequest;
-import com.vnk.eassy_buy.dto.Address.AddressResponse;
+import com.vnk.eassy_buy.dto.address.AddressRequest;
+import com.vnk.eassy_buy.dto.address.AddressResponse;
 import com.vnk.eassy_buy.repository.UserRepository;
 import com.vnk.eassy_buy.repository.address.AddressRepository;
 

@@ -1,4 +1,4 @@
-package com.vnk.eassy_buy.dto.Address;
+package com.vnk.eassy_buy.dto.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

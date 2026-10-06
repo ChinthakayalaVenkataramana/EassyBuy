@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vnk.eassy_buy.dto.Address.AddressRequest;
-import com.vnk.eassy_buy.dto.Address.AddressResponse;
+import com.vnk.eassy_buy.dto.address.AddressRequest;
+import com.vnk.eassy_buy.dto.address.AddressResponse;
 import com.vnk.eassy_buy.service.address.AddressService;
 
 import lombok.AllArgsConstructor;

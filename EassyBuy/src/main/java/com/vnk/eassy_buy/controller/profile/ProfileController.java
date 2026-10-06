@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 public class ProfileController {
 	private final ProfileService profileService;
 
-	@PostMapping("/create-profile")
+	@PostMapping
 	public ResponseEntity<String> createProfile( @RequestBody ProfileRequest profileRequest) {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(profileService.profile(profileRequest));
@@ -34,13 +34,13 @@ public class ProfileController {
 		return ResponseEntity.ok(profileService.getProfile());
 	}
 
-	@PutMapping("/update-profile")
+	@PutMapping
 	public ResponseEntity<String> updateProfile(@RequestBody ProfileRequest profileRequest) {
 
 		return ResponseEntity.ok(profileService.profile(profileRequest));
 	}
 
-	@DeleteMapping("/delete-profile")
+	@DeleteMapping
 	public ResponseEntity<Void> deleteProfile() {
 
 		profileService.deleteProfile();
