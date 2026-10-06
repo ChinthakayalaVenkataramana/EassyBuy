@@ -2,8 +2,8 @@ package com.vnk.eassy_buy.service.address;
 
 import java.util.List;
 
-import com.vnk.eassy_buy.dto.Address.AddressRequest;
-import com.vnk.eassy_buy.dto.Address.AddressResponse;
+import com.vnk.eassy_buy.dto.address.AddressRequest;
+import com.vnk.eassy_buy.dto.address.AddressResponse;
 
 public interface AddressService {
 

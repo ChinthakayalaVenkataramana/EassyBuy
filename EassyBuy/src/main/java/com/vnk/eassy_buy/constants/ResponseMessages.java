@@ -11,12 +11,14 @@ public enum ResponseMessages {
 
 	PROFILE_SAVED_SUCCESSFULLY("Profile saved successfully"), PROFILE_NOT_FOUND("Profile not found"),
 
-
 	SELLER_REQUEST_SUBMITTED("Seller request submitted successfully. Waiting for admin approval."),
 	SELLER_ALREADY_ACTIVE("You are already an active seller."),
 	SELLER_REQUEST_ALREADY_PENDING("Your seller request is already pending."),
-	SELLER_NOT_FOUND("Seller profile not found."),
-	SELLER_UPDATED_SUCCESSFULLY("Seller updated successfully.");
+	SELLER_NOT_FOUND("Seller profile not found."), SELLER_UPDATED_SUCCESSFULLY("Seller updated successfully."),
+
+	USER_ALREADY_ADMIN("User is already an admin"), ADMIN_CREATED("Admin created successfully"),
+	ADMIN_UPDATED("Admin updated successfully"), ADMIN_NOT_FOUND("Admin not found"),
+	USER_NOT_ADMIN("User is not an admin");
 
 	private final String message;
 
